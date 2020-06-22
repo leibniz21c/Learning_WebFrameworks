@@ -1,0 +1,11 @@
+url.py
+
+url을 입력하면 url입력시 url.py로 간다. 여기가 Url을 정의
+런서버에서 키면 url.py로 감. 
+path에 include는 views에 있는 함수
+
+
+연결알기
+모델알기 admin
+
+CRUD 알기
