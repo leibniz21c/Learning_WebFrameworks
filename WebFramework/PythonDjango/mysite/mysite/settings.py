@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'd!1x8it+%(%@2h55%sdye5eqm_7#^$w&+8w0oxt5runkb#0292'
+SECRET_KEY = '%c!jfz!uxz8j3s)b631-xxq^#+=*!-7&!mp-88hi33wh@&e5q&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,14 +31,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'polls.apps.PollsConfig', #polls앱의 포함사실 알리기
-]
+] # 여기다가 장고에게 이러한 앱들을 사용하겠다! 라고 선언해두는 것.
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -79,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-}
+} # 다른 데이터베이스를 사용하고 싶으면 이걸 변경하면됨.
 
 
 # Password validation

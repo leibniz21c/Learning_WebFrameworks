@@ -14,11 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include #include가 있어야 polls를 바라보게 할 수 있음.
+from django.urls import path, include
 
 urlpatterns = [
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
 ]
-
-# include()는 URLconf들을 참조할 수 있도록 함.
