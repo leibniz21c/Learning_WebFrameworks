@@ -1,0 +1,110 @@
+뷰추가하기 :
+polls/views.py에
+
+def detail(request, question_id):
+...
+...
+
+를 추가함.
+
+뷰에서는 꼭 기억해야 될 것이 request라는 인자가 
+꼭 필요함. 이는 client에게서 받는 인자고 여러가지 
+정보가 들어있음.
+그리고 HttpResponse를 통해서 꼭 client에게 
+리스폰스를 준다고 생각하면됨.
+
+이후에 뷰를 호출하기위해서 urls 코드를 작성한다.
+
+polls/urls.py
+official documents 참고.
+
+이후에 view에서 클라이언트에게 리퀘스트를 받고 
+내부적으로 정보를 처리한 이후에 서버에서 다시 리스폰스를 준다.
+
+---------------------------------------------------------------
+이제 이짓을 모듈화를 해보자.
+View는 앞으로 내부 로직이라고 생각하고
+Templete가 실제로 보여주는 거라고 생각하자.
+
+-----------------------------------------------------------------
+템플릿 디렉토리를 만들건데 이렇게 만들어야한다.
+polls/templetes/polls ==> 그냥 국룰이다.
+
+이 폴더내에 index.html을 만들자.
+이후에 뷰에서 template에 뿌려주자.
+
+-----------------------------------------------------------------
+render 함수 :
+
+기존의 view에서의 처리
+def index(request):
+   latest_question_list = Question.objects.order_by('-pub_date')[:5]
+   template = loader.get_template('polls/index.html')
+   context = {
+       'latest_question_list': latest_question_list,
+   }
+   return HttpResponse(template.render(context, request))
+
+render함수를 사용한 view에서의 처리:
+from django.shortcuts import render
+
+def index(request):
+   latest_question_list = Question.objects.order_by('-pub_date')[:5]
+   context = {'latest_question_list': latest_question_list }
+   return render(request, 'polls/index.html', context)
+
+------------------------------------------------------------
+404 에러 발생시키기
+
+from django.http import Http404
+from django.shortcuts import render
+
+from .models import Question
+
+...
+
+def detail(request, question_id):
+   try:
+      question = Question.objects.get(pk=question_id)
+   except Question.DoesNotExist :
+      raise Http404("Question does not exist.")
+   return render(request, 'polls/detail.html', {'question':question})
+
+---------------------------------------------------------------------
+shortcut으로 http404에러 처리하기 ( 지름길 )
+
+from django.shortcuts import get_object_or_404, render
+
+from .model import Question
+...
+def detail(request, question_id)
+   question = get_object_or_404(Question, pk=question_id)
+   return render(request, 'polls/detail.html', {'question':question})
+
+-----------------------------------------------------------------------------
+<<< template : detail >>>
+중요!!
+<h1>{{ question.question_text }}</h1>
+<ul>
+{% for choice in question.choice_set.all %}
+    <!-- choice가 외래키로 가지고있는걸 가지고오기 -->
+    <li>{{ choice.choice_text }}</li>
+{% endfor %}
+</ul>
+
+---------------------------------------------------------------------
+템플릿에서 하드코딩된 URL 제거하기.
+
+polls/index.html에 링크를 적으면
+부분적으로 하드코딩되는 현상 발생.
+하드코딩 : 그냥 진짜 값을 대입하는거 literal 넣기.
+
+<li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+이렇게 된거가 유지보수관점에서 불리함.
+왜냐면 수 많은 템플릿을 가진 프로젝트들의 URL을 바꾸어야 함.
+
+<li><a href="{% url 'detail' question.id %}">{{ question.question_text }}</a></li>
+만약에 이렇게 처리하면 polls.urls 모듈에 서술된
+url의 정의를 탐색하는 식으로 동작함. 
+
+이렇게하면 detail에 대한 url 네임을 사용할 수 있음.(polls/urls.py에 저장)
