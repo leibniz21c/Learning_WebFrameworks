@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Question
 
 # Create your views here.
@@ -14,8 +14,7 @@ def detail(request, question_id):
     """
     Qusetion 목록 상세 출력
     """
-    question = Question.objects.get(id=question_id)
+    question = get_object_or_404(Question, pk=question_id)
     context = {'question':question}
     return render(request, 'myapp/question_detail.html', context)
 
-    
