@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ldbc(1+%a_2azt@f*gac0!933e$656r7a*!$y56p6=i@g&^*hj'
+SECRET_KEY = '97weza49df2t^q^m$=dw-2+@1!6c-s(nsf&^l^$cz(k=0+v)r4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'myapp.apps.MyappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -55,7 +54,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'mysite/templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

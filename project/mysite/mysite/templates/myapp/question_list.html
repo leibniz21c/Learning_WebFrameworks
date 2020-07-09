@@ -1,9 +1,0 @@
-{% if question_list %}
-    <ul>
-    {% for question in question_list %}
-        <li><a href="/myapp/{{ question.id }}/">{{ question.subject }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>Question 객체가 존재하지 않습니다.</p>
-{% endif %}
