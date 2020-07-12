@@ -11,5 +11,13 @@
     <div id="body">
         {{ question.content }}
     </div>
+      <form action="{% url 'myapp:answer_create' question.id %}" method="post">
+      {% csrf_token %}
+      <textarea name="content" id="content" rows="15"></textarea>
+      <input type="submit" value
+      </form>
+    <div>
+      
+    </div>
   </body>
 </html>

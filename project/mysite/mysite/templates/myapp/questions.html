@@ -12,7 +12,7 @@
         {% if question_list %}
             <ul>
                 {% for question in question_list %}
-                    <a href="/myapp/questions/{{ question.id }}"><li>{{ question.subject }}</li></a>
+                    <a href="{% url 'myapp:question_detail' question.id %}"><li>{{ question.subject }}</li></a>
                 {% endfor %}
             <ul>
         {% else %}

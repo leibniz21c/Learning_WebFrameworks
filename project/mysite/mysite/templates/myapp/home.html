@@ -6,11 +6,11 @@
   </head>
   <body>
     <div id="head">
-        <a href="/myapp/"><h1>Welcome to myapp!</h1></a>
+        <a href="{% url 'myapp:index' %}"><h1>Welcome to myapp!</h1></a>
     </div>
     <div id="body">
         <p>This is a site in myapp. If you want to watch about Questions,</p>
-        <p>You have to press this link.</p><a href="/myapp/questions/">Link</a><br><br>
+        <p>You have to press this link.</p><a href="{% url 'myapp:question_list' %}">Link</a><br><br>
         <p>If you want to watch about Answer,</p>
         <p>들어가지마 그냥. 여기는.</p><br><br>
     </div>
