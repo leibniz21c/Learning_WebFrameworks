@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--This is my first comment.-->
+    <title> Questions list </title>
+  </head>
+  <body>
+    <div id="head">
+        <h1>Questions list</h1>
+    </div>
+    <div id="body">
+        {% if question_list %}
+            <ul>
+                {% for question in question_list %}
+                    <a href="/myapp/questions/{{ question.id }}"><li>{{ question.subject }}</li></a>
+                {% endfor %}
+            <ul>
+        {% else %}
+            <p>Dosen't exist.</p>
+        {% endif %}
+    </div>
+  </body>
+</html>
