@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Question : {{ question.subject }}</title>
+    </head>
+    <body>
+        <h1> {{ question.subject }} </h1>
+        <div id='content'>
+            {{ question.content }}
+        </div>
+        <p>--------------------------------------------------</p>
+        <form action="{% url 'pybo:answer_create' question.id %}" method="post">
+        {% csrf_token %}
+            <textarea name="content" id="content" rows="15"></textarea>
+            <input type="submit" value="제출">
+        </form>
+        <p>--------------------------------------------------</p>
+        {% for answer in answer_list %}
+            <h3>{{ forloop.counter }} 발행일 : {{ answer.create_date }}</h3>
+            {{ answer.content }}
+            <p>--------</p>
+        {% endfor %}
+    </body>
+</html>

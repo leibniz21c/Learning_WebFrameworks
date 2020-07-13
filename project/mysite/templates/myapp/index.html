@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>This is pybo!</title>
+    </head>
+    <body>
+        <h1> Pybo 게시판 </h1>
+        {% if question_list %}
+        <ul>
+            {% for question in question_list %}
+            <a href='{% url 'pybo:detail' question.id %}'><li>{{ question.subject }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p> 게시판이 비어있습니다. </p>
+        {% endif %}
+    </body>
+</html>
