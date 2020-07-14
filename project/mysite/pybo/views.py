@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
+
 from .models import Question
+
 
 # Create your views here.
 def index(request):
@@ -10,9 +12,7 @@ def index(request):
 
 def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
-    answer_list = question.answer_set.all()
-    context = {'question':question, 'answer_list':answer_list}
-    return render(request, 'myapp/question_detail.html', context)
+    return render(request, 'myapp/question_detail.html', {'question':question})
 
 def answer_create(request, question_id):
     question = get_object_or_404(Question, pk=question_id)

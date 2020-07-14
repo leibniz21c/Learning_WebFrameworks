@@ -4,21 +4,25 @@
         <title>Question : {{ question.subject }}</title>
     </head>
     <body>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
         <h1> {{ question.subject }} </h1>
         <div id='content'>
             {{ question.content }}
         </div>
         <p>--------------------------------------------------</p>
         <form action="{% url 'pybo:answer_create' question.id %}" method="post">
-        {% csrf_token %}
+            {% csrf_token %}
             <textarea name="content" id="content" rows="15"></textarea>
             <input type="submit" value="제출">
         </form>
         <p>--------------------------------------------------</p>
-        {% for answer in answer_list %}
-            <h3>{{ forloop.counter }} 발행일 : {{ answer.create_date }}</h3>
-            {{ answer.content }}
-            <p>--------</p>
-        {% endfor %}
+        <p> 총 {{ question.answer_set.count }}개의 답변이 있습니다.</p>
+        <ul>
+            {% for answer in question.answer_set.all %}
+            <li>{{ answer.content }}</li>
+                <h5>작성일 : {{ answer.create_date }}<h5>
+            {% endfor %}
+        </ul>
     </body>
 </html>
