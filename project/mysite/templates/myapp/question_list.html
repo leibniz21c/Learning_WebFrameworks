@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>This is pybo!</title>
+    </head>
+    <body>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+      
+        {% comment %} <h1> Pybo 게시판 </h1>
+        {% if question_list %}
+        <ul>
+            {% for question in question_list %}
+            <a href='{% url 'pybo:detail' question.id %}'><li>{{ question.subject }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p> 게시판이 비어있습니다. </p>
+        {% endif %} {% endcomment %}
+
+        <div class="container my-3">
+            <table class="table">
+                <thead>
+                <tr class="thead-dark">
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>작성일시</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if question_list %}
+                {% for question in question_list %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>
+                        <a href="{% url 'pybo:detail' question.id %}">{{ question.subject }}</a>
+                    </td>
+                    <td>{{ question.create_date }}</td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="3">질문이 없습니다.</td>
+                </tr>
+                {% endif  %}
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
